@@ -1,5 +1,22 @@
 // Write your JavaScript code here!
 window.addEventListener("load", function() {
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+      response.json().then( function(json) {
+      let targetPlanet = Math.floor(Math.random()*json.length);
+      let missionTarget = document.getElementById('missionTarget');
+      missionTarget.innerHTML = `
+      <h2>Mission Destination</h2>
+      <ol>
+          <li>Name: ${json[targetPlanet].name}</li>
+          <li>Diameter: ${json[targetPlanet].diameter}</li>
+          <li>Star: ${json[targetPlanet].star}</li>
+          <li>Distance from Earth: ${json[targetPlanet].distance}</li>
+          <li>Number of Moons: ${json[targetPlanet].moons}</li>
+      </ol>
+      <img src="${json[targetPlanet].image}">
+      `
+      });
+   });
    let launchForm = document.getElementById('launchForm');
    launchForm.addEventListener("submit", function(event) {
 
